@@ -1,2 +1,70 @@
 Difference between Docker and Kubernetes:
 ========================================
+Docker is a container platform.Containers are short lived.
+Kubernetes is a container orchestration platform.
+
+Problems with docker:
+	Problem:1. Single host - On a given host a docker is installed, and on docker we create some 100 containers. If one of the container starts consuming more memory , then remaining few containers may die or not even start.
+	Problem:2. Auto-healing - When a container is killed, application inside container will not be accessible. Unless someone starts the container, app wont start. i.e Auto-healing feature is not available.
+	Problem:3. Auto-scaling - On a given host(4GB RAM, 4CPU) a docker is installed, and on docker we create ONE container. This container can max go upto 4CPU and 4GB. To handle the increasing load, we can do it manually or automatically. But docker doesnt support both manual and auto scaling feature.
+	Problem:4. Docker is a minimalistic platform. It doesnt support any of the Enterprise level application suppport like load balanceer, firewall, auto-scale, auto-healing, api gateways etc
+	
+Kubernetes to solve above problems:
+Kubernetes is dependent on yaml files. Everything in kubernets is written in yaml files.
+	By default kubernets is a cluster. (Cluster is a group of nodes)
+	Solution for Problem-1: Kubernetes is installed in a master/node architecture. i.e one master node and multiple nodes.
+	Solution for Problem-2: Kubernetes controls and fixes the damage. Ex: For some reason if container goes down, using Auto-healing feature, the kubernetes will start/rollout a new container even before the previous container goes down.
+	Soultion for Problem-3: Replication Controller/Replica sets: In deployment.yaml file,we can configure this auto scaling or through HPA(Horizontal Pod Autoscaler) feature.
+	Solution for Problem-4: Provides Enterprise level container orchestration platform like load balacing, security, networking etc.
+	
+Architecture of K8s:
+===========================
+Components in Control plane(Master node):
+	API server, etcd, Scheduler,Controller Manager, CloudControllerManager.
+Components in Data plane(Worker node):
+	Kubelet, Kube-proxy, Container-runtime etc.
+	
+In docker, the simplest thing is container, 
+In docker, we have something called Container Runtime(DockerShim) which will help to a run a container.
+In docker, we have Bridge Networking
+
+Pod is a wrapper over a container with advanced capabilities.
+
+In K8s, the simplest thing is pod.
+In K8s, we have container-runtime, which is responsible for running the container.
+In K8s, we have kubelet which will be used to run/maintain the pod.Ex: we create one master and one worker node. The request goes through master(control plane)
+	kubelet ensures that the pod is always in running state.
+In K8s, we have Kube Proxy. Every pod/container which is created has to be allocated with a IP address and provided with load-balacing capabilities. These are 		provide by Kube-proxy. It used IPTables from linux for networking related configuration.
+
+In K8s, we have API Server - it basically exposes the K8s to external world.
+In K8s, we have Scheduler: - If a user is trying to create a pod, he tries to access the API Server and lets say the API Server decides that node1 is free.To 		Schedule the pod/resources on node1 there is a componet called Scheduler responsible to schedule the pod 
+	So, API server takes the decision and  Scheduler acts on the decision.
+In K8s, we have etcd: - it is a backup service of the entire cluster application. It is basically a key-value store.
+In K8s, we have Controller Manager: - To support Auto-scaling, K8s has controllers - replica set. Replica sets maintains the state of pods. It ensures the pods are always running. So controller-manager ensures that the K8s controllers are always running.
+In K8s, we have CloudControllerManager: - Kubernetes can be run on Cloud platforms like EKS.
+
+K8s Production Systems:
+===========================
+Creation, Upgradation, Deletion of K8s cluster.
+What is K8s Distribution? How to manage the installtion and upgrade of distribution.
+	Any open source platform like Linux, people develop distributions on top of it called Amazon Linux, Redhat, CentOS distribution etc.
+	Similarly, K8s is open source container orchestration platform. People developed distribution on top of it called EKS, OpenShift, Tanzu, Rancher etc.
+
+Minicube is just for development/learning purpose. Whereas K8s is for entetprise support or used for Production.
+
+How Devops engineer manage 100s of clusters in Production?
+	Using KOPS or either Kubeadm.
+		KOPS(K8s Operations) - Lifecyce of K8s like Install, Upgrade, Modify, Delete can be managed by KOPS.
+		
+		
+		
+		
+Reference:
+https://github.com/iam-veeramalla/Kubernetes-Zero-to-Hero		
+		
+	
+
+
+	
+
+	
