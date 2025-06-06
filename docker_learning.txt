@@ -1,0 +1,148 @@
+AWS IAM user:
+https://sassy3027.signin.aws.amazon.com/console
+arn:aws:iam::820242910693:user/Shashi_admin
+Username: Shashi_admin
+Pwd: @G0t2BTuf
+
+
+VirtualMachines:
+=================
+Hypervisor is a software run on any physical server to create VirtualMachines.
+Hypervisor uses a concept called Virtualisation to create VirtualMachines.
+EC2 means Virtual Machine in AWS terms. 
+To efficiently use a physical server, the concept of VirtualMachines was introduced.
+
+Terraform is used to automate the process of creating resources in AWS/Azure
+
+AWS CLI, AWS CFT, AWS API(Boto3),AWS CDK,Terraform are used to create EC2 instances in AWS using automation (good for loads of requests)
+By using AWS console also we can create EC2 instance in AWS manually.  (good for fewer requests)
+
+Keyvalue pair is used for autentcation, While creating EC2 instance in AWS,
+
+instance name: sk_instance
+keyvalue pair: test111
+
+Containers:
+============
+Virtual Machine is an advancement to physical servers.   (VirtualMachines have complete operating system)
+Containers are advancement to VirtualMachines.  (Containers do not have complete operating system, i.e they will have a Base Image)
+To efficiently use the VirtualMachines, the concept of Containers was introduced.
+
+Containers can be created in 2 ways:
+1.On top of VirtualMachines(already contains OS) ->  install Docker -> on top of Docker, create containers.
+2.Directly on top of physical server -> install OS on physical server -> install Docker -> on top of Docker, create containers.
+Docker is containerisation platform to create containers. Just like to create a VirtualMachines we need Hypervisor.
+
+Containers use the resources from the base operating system that they are running on(either Physical server or VirtualMachine).
+A Container is package/bundle which is a combination of the application, application libraries/dependencies and System dependencies.
+
+To create container.
+Creare a Docker file and submit it to Docker engine using docker command.
+The docker engine converts the file to docker image/container image.
+Using docker command, convert the docker image to container. 
+Note: If docker engine is down then all the containers go down. This can be resolved can using 'Buildah'.
+
+Docker:
+==============
+reference - https://github.com/iam-veeramalla/Docker-Zero-to-Hero
+
+Docker is a platform to implement the containerisation.
+Docker client - cli
+Docker daemon - is a process which will be installed. Whenever we install docker, then we are actually installing docker-daemon.
+docker cli commands which are run are executed in docker-daemon to create docker images and docker containers.
+Registry - using docker-daemon we can push docker image to docker registry.  Registry is a place to store the docker images. DockerHub is popular registry.
+
+Lifecycle of docker:
+====================
+1.Write a docker file.
+	1. Get a base image
+	2. Put the source code in the base image.
+	3. Run the specific command.
+2.Using docker cli, submit docker file to docker daemon using docker build commmand which generates docker image.
+3.Once the image is ready, use docker run command, it creates docker container.
+4.This container can be shared with pubilc docker registry. They can download the container and run the application.
+
+
+Github vs DockerHub:
+======================
+Github is used to store the sourceCode. Its a version control platform
+DockerHub is used to store the docker images.
+
+
+Difference between Entrypoint and CMD in docker file ?
+Both can be used to execute as start command. 
+Entry point value cant be changed. i.e it will have non oveeridable values.
+While CMD is configurable. (example: port value can be overriden)
+
+
+Multi Stage builds:
+=======================
+Distroless images are minimalistic images which hardly have any packages.
+Ex: python distroless image will have only python runtime
+	java distroless image will have only java runtime.
+one more advantage of having distroless image is that it provides security.
+
+
+Docker Bind Mounts and Volumes: 
+===============================
+Bind mount is used to bind specific folder in container to the specific folder on the Host. So that if the current container goes down and new container comes up, it can still access the data present in that folder.
+
+Volumes - can be created using docker CLI. These are logical partitions created on host.
+Apart from host, volumes can be created on external sources like any EC2 instance, storage like S3, NFS etc
+Volumes can be created. destroyed, also can be used to bind to any container like c1 or c2 or both.
+But here not any specific directory is binded. Volumes are logical disks. 
+Volumes have lifecycle.
+
+Docker Networking:
+=====================
+1.Bridge Networking:
+Networking allows containers to communicate with each other and the host system. Example: Front end container shuld talk to backend container.
+Also a scenario where we should restrict containers from communicating with each other. Example Login container need no talk to Payment container.
+
+A bridge network is created by default whenever a container is created.
+A container can talk to a host using Bridge Networking. This bridge is a virtual ethernet.(VEth -> docker0)
+If there are 2 containers created on the host, then both containers will use same VEth to communicate to the host. So in this case we need custom Bridge Networking.
+Custom bridge networking will allow containers to have custom custom network(unique IPs) to communicate to the host. From this the different containers created inside the host are isolated.
+
+2.Host Networking:
+	Whenever a container is created, docker will bind the container  to the Eth0 of the host.
+	i.e if we have access to host, then we can access container as well. This is not the secure approach.
+	
+3.Overlay networking:
+	Overlay networking is useful when we have multiple hosts.	
+
+
+Docker interview questions:
+=============================
+https://www.youtube.com/watch?v=I6ZBUEc4LrU
+1. What is docker ?
+		It is a open containerisation platform. It enable developers to package applications into bundles. Also to manage lifecycle of containers.
+2. How containers are different from Virtual machines?
+3. What is docker lifecycle ?
+		Docker file -> docker image -> docker container -> push to registry
+4. What are different Docker components ?
+		Client(docker cli - build, run, push , pull), docker host(docker daemon - contains images and containers), Registry (docker hub)
+5. What is the difference between docker COPY and docker ADD ?
+		Docker ADD can copy files from a specific URL (ex: get a log file from AWS S3 storage or text file from github or specific package from internet etc)
+		unlike Docker COPY which can only copy files from host system into container.
+6. What is the difference between CMD and ENTRYPOINT ?
+7. What are the networking types in DOcker and what is the default ?
+		Bridge, Host, Overlay, MacVlan.   Default is Bridge Network.
+8. Can you explain how to isolate networking between the containers ?
+		By using Custom Bridge network.
+9. What is a multi stage build in Docker ?
+		Multi stage build allows to build docker container in multiple stages allowing to copy artifacts from one stage to another. Major advantage is to build light weight containers.
+10.What are distro less images in docker ?
+		VMs are exposed to vulnerabilities. Similarly, containers are also exposed to vulnerabilities as required and not required packages are also installed on containers. So to overcome this, the distro less images contain only application and its run time dependencies with a very minimum operating system libraries. They are very small and light weight images.
+11.What steps do you take to secure containers ?
+
+
+
+
+
+
+
+References:
+Docker: https://www.youtube.com/watch?v=7JZP345yVjw&list=PLdpzxOOAlwvLjb0vTD9BXLOwwLD_GWCmC
+
+

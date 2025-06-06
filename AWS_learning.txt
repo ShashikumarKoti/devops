@@ -1,0 +1,41 @@
+Admin user:
+https://sassy3027.signin.aws.amazon.com/console
+Username: Shashi_AWS
+Pwd: @G0t2BTUf
+
+
+IAM user:
+https://sassy3027.signin.aws.amazon.com/console
+arn:aws:iam::820242910693:user/Shashi_admin
+Username: Shashi_admin
+Pwd: @G0t2BTuf
+
+https://sassy3027.signin.aws.amazon.com/console
+Username: Shashi_test
+Pwd: @G0t2BTUf
+
+
+Link to switch role:
+https://signin.aws.amazon.com/switchrole?roleName=ec2-role&account=sassy3027
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::975050181034:role/ec2-role"
+    }
+}
+
+
+IAM Identity AWS access portal URL:
+https://d-c367704556.awsapps.com/start
+
+Username: Shashi
+Pwd: @G0t2BTUf
+
+
+EC@ instance for Windows
+DNS: ec2-23-22-93-207.compute-1.amazonaws.com
+Pwd: jDBuPa!xNv*J&cauxGDe(GyMy5y)G5Zd
