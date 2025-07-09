@@ -39,3 +39,116 @@ Pwd: @G0t2BTUf
 EC@ instance for Windows
 DNS: ec2-23-22-93-207.compute-1.amazonaws.com
 Pwd: jDBuPa!xNv*J&cauxGDe(GyMy5y)G5Zd
+
+
+Datacenter - group of servers
+Cluster - group of nodes
+
+	IAM - solves the problem of authentication and authorization
+	  Users - creating an aws account for user to login to aws
+	  Groups - 
+	  Policies - it is about what the user can do 
+	  Roles
+
+IAM user:
+============
+https://sassy3027.signin.aws.amazon.com/console
+username: skoti_1
+Pwd: @G0t2BTUf	
+
+Username: skoti_2
+pwd: @G0t2BTUf
+
+
+Login to EC2 instance from terminal:
+From path where *.pem file is present, execute below commandßßß
+ssh -i aws_key_pair.pem ubuntu@3.108.54.173
+
+EC2 - Elastic Cloud Compute:
+============================
+   Compute means - we are requesting AWS to provide a compute instance of which is a combination of CPU , RAM and disk. I.e we are asking for Virtual Server.
+   Virtual server can be used by multiple users at a time. Whereas physical server(laptop) can be used by one user at a time.
+   AWS has multiple physical servers across the world. When we ask for EC2 instance in a specific region, it will take the request to Hyoervisor and give the virtual machine.
+   Elastic - means it can be scale up and scaled down.
+
+So EC2 gives a Virtual machine on a Cloud platform , which is Elastic in nature
+
+Why we need EC2 ?
+   TO get rid of maintenance of upgrading, security issues, patching etc of 1000s of servers manualy. 
+   AWS manages this for us.
+   Pay as you Go facility is provided. i.e servers can be shutdown when not in use.
+
+
+Types of EC2 instances:
+ 1. General purpose
+ 2. Compute optimised
+ 3. Memory optimised
+ 4. Storage optimised
+ 5. Accelerated computing
+
+KeyValue pair - is used to login to instance. Instance will have public key, user will have private key. Using public-private key we will login to instance.
+
+Regions in AWS : these are spread across the world. Inside each region we have multiple Availability Zones(AZ).
+Ex: If Bangalore is selected as Region, then AZ will be in South Bangalore, North Bangalore etc.
+
+
+VPC - Virtual Private Cloud:
+=============================
+What is VPC ? - This is separate private cloud for a given company. Build and maintained by DevOps team by looking at AWS documentation
+VPC is defined by IP address range.   A particular IP address range is given by AWS for a project. (Ex: 65536 IP addresses ).
+Again this IP address range is divided to share among different sub-projects in the main project. This splitting of IP address range is called SubNet. These are private subnets with no access to internet
+Next a gateway should be created to access the VPC. This is called internet gateway
+A user first access Public subnet inside the VPC i.e through internet gateway
+Next there is a Load Balancer which is assigned to Public subnet
+Each SubNet is created with a Route table. This route helps the Load balancer to pass the request to the given SubNet.
+Next there is a Security Group in front of SubNet to validate the IP address or port the request.
+
+So one request from outside world i.e internet should first go through Internet Gateway -> Public Subnet(common subnet across VPC) -> Load Balancer(attached to public subnet and has target group based on route table) -> Private Subnet -> Security Group
+
+NACL : Network Access Control List
+ Its is a security group created with some configuration. Useful when we want to apply same SecurityGroups to multiple applications.  I.e instead of defining same security group to each of the application, we can create NACL and assign that to each application
+
+Security added at Subnet level is called NACL.
+Security added at EC2 instance level is called SecurityGroup.
+
+NACL and SecurityGroup are very critical as they are at the last point of security before the request reached the application.
+
+NAT gateway -  Now a SubNet wants to access something from outside internet from xyzzy.com. Then this xyz.com should not know about the IP address of the private SubNet. So this IP address should be masked.
+Masking of IP address is caked NAT gateway. So NAY gateway will mask the SubNet IP and change the IP address to either of the Load balancer(called SNAT) or Router(called NAT) when connecting to outside world.
+NAT Gateway is created in the Public SubNet of the VPC
+
+
+
+SecurityGroup has InboundRules and OutBoundRules.
+   Traffic flowing inside application is called Inbound traffic 
+   Traffic flowing outside application is called Outbound traffic.
+
+Note: With NACL we can deny all the traffic and allow only traffic from specific IPs , where as from SecurityGroup we can allow IPs that are required.
+
+
+What is Route53:
+It provides DNS as a service.
+DNS -> Domain Name System. DNS service resolves/maps the Domain Name to specific IP address. 
+IP address might change and it is also hard to remember the IPs. So we have DNS.
+Route53 can also perform HealthChecks on the web applications
+
+So now Route53 comes into picture in the request flow path. Request from outside world i.e internet should first go through Internet Gateway -> Public Subnet(common subnet across VPC) -> Route53 -> Load Balancer(attached to public subnet and has target group based on route table) -> Private Subnet -> Security Group
+
+Steps to configure Route53:
+ Domain Registration - Buy either from AWS or from outside (Ex: GoDaddy...and integrate it with AWS)
+ Add them in the HostedZones. i.e in HostedZones we create the DNS records. (Here Domain name are mapped to IP addresses)
+So request is passed from Route53 to HostedZones to check the mapping of DNS to IP address. If match found, then request is processed further
+
+What is elastic IPAddress:
+ It remains the same even if the instance is terminated or restarted.  Basically it is s static IP address attached to a instance.
+
+
+
+Day 8 to be watched:
+
+
+
+Reference:
+https://www.youtube.com/watch?v=n6RWhajimZg&list=PLdpzxOOAlwvLNOxX0RfndiYSt1Le9azze&index=2
+
+https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbVUyQzBTRHlRaU5NRnNFZHB0Y2Mzd3UtSXlXUXxBQ3Jtc0tsQno4UHFnODVienk4bUNrT2N3c01GSThKNkYtdGk3MkpEWDg1X1UwdkdUUUYwbWdRbjdPMzkzYW4zVkVTdWpvcHZVcU9zWEUxRDl2Y2h2NlZIY0M2X3RTb01tbi14Y1lWd081d3Y3SVRrWXlYdl9EYw&q=https%3A%2F%2Fgithub.com%2Fiam-veeramalla%2Faws-devops-zero-to-hero%23readme&v=GkKNxyLp_V0
