@@ -113,6 +113,8 @@ Security added at EC2 instance level is called SecurityGroup.
 
 NACL and SecurityGroup are very critical as they are at the last point of security before the request reached the application.
 
+
+Network Address Translation(NAT)
 NAT gateway -  Now a SubNet wants to access something from outside internet from xyzzy.com. Then this xyz.com should not know about the IP address of the private SubNet. So this IP address should be masked.
 Masking of IP address is caked NAT gateway. So NAY gateway will mask the SubNet IP and change the IP address to either of the Load balancer(called SNAT) or Router(called NAT) when connecting to outside world.
 NAT Gateway is created in the Public SubNet of the VPC
@@ -142,9 +144,28 @@ So request is passed from Route53 to HostedZones to check the mapping of DNS to 
 What is elastic IPAddress:
  It remains the same even if the instance is terminated or restarted.  Basically it is s static IP address attached to a instance.
 
+AWS S3:
+Simple Storage Service
+ It is scalable, Highly available , Cost effective, Performance and Secure
+It allows to store and retrieve any amount of data from anywhere in the web.
+Ex: app log files, back up of DB
 
 
-Day 8 to be watched:
+What can be stored in S3 ?
+S3 allows to create buckets and in which we can store anything.  However one object cannot be more than 5TB
+Objects in S3 are globally accessible using http protocol.
+
+Objects stored are encrypted.
+
+
+Interview questions:
+https://github.com/iam-veeramalla/aws-devops-zero-to-hero/blob/main/day-8/Interview_q%26a
+https://youtu.be/qtkWHhikLh8?si=JVD6SCsgUgIY5WWc
+
+
+
+
+
 
 
 
