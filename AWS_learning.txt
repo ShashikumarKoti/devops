@@ -44,7 +44,7 @@ Pwd: jDBuPa!xNv*J&cauxGDe(GyMy5y)G5Zd
 Datacenter - group of servers
 Cluster - group of nodes
 
-	IAM - solves the problem of authentication and authorization
+	IAM - solves the problem of authentication and authorisation
 	  Users - creating an aws account for user to login to aws
 	  Groups - 
 	  Policies - it is about what the user can do 
@@ -61,20 +61,20 @@ pwd: @G0t2BTUf
 
 
 Login to EC2 instance from terminal:
-From path where *.pem file is present, execute below commandßßß
+From path where *.pem file is present, execute below command
 ssh -i aws_key_pair.pem ubuntu@3.108.54.173
 
 EC2 - Elastic Cloud Compute:
 ============================
    Compute means - we are requesting AWS to provide a compute instance of which is a combination of CPU , RAM and disk. I.e we are asking for Virtual Server.
    Virtual server can be used by multiple users at a time. Whereas physical server(laptop) can be used by one user at a time.
-   AWS has multiple physical servers across the world. When we ask for EC2 instance in a specific region, it will take the request to Hyoervisor and give the virtual machine.
+   AWS has multiple physical servers across the world. When we ask for EC2 instance in a specific region, it will take the request to Hypervisor and give the virtual machine.
    Elastic - means it can be scale up and scaled down.
 
 So EC2 gives a Virtual machine on a Cloud platform , which is Elastic in nature
 
 Why we need EC2 ?
-   TO get rid of maintenance of upgrading, security issues, patching etc of 1000s of servers manualy. 
+   TO get rid of maintenance of upgrading, security issues, patching etc of 1000s of servers manually. 
    AWS manages this for us.
    Pay as you Go facility is provided. i.e servers can be shutdown when not in use.
 
@@ -116,7 +116,7 @@ NACL and SecurityGroup are very critical as they are at the last point of securi
 
 Network Address Translation(NAT)
 NAT gateway -  Now a SubNet wants to access something from outside internet from xyzzy.com. Then this xyz.com should not know about the IP address of the private SubNet. So this IP address should be masked.
-Masking of IP address is caked NAT gateway. So NAY gateway will mask the SubNet IP and change the IP address to either of the Load balancer(called SNAT) or Router(called NAT) when connecting to outside world.
+Masking of IP address is called NAT gateway. So NAT gateway will mask the SubNet IP and change the IP address to either of the Load balancer(called SNAT) or Router(called NAT) when connecting to outside world.
 NAT Gateway is created in the Public SubNet of the VPC
 
 
@@ -125,7 +125,7 @@ SecurityGroup has InboundRules and OutBoundRules.
    Traffic flowing inside application is called Inbound traffic 
    Traffic flowing outside application is called Outbound traffic.
 
-Note: With NACL we can deny all the traffic and allow only traffic from specific IPs , where as from SecurityGroup we can allow IPs that are required.
+Note: With NACL we can deny all the traffic and allow only traffic from specific IPs , whereas from SecurityGroup we can allow IPs that are required.
 
 
 What is Route53:
@@ -142,7 +142,7 @@ Steps to configure Route53:
 So request is passed from Route53 to HostedZones to check the mapping of DNS to IP address. If match found, then request is processed further
 
 What is elastic IPAddress:
- It remains the same even if the instance is terminated or restarted.  Basically it is s static IP address attached to a instance.
+ It remains the same even if the instance is terminated or restarted.  Basically it is s static IP address attached to an instance.
 
 AWS S3:
 Simple Storage Service
@@ -158,14 +158,15 @@ Objects in S3 are globally accessible using http protocol.
 Objects stored are encrypted.
 
 
+AWS Cli, CloudFormation, Terraform, CDK etc are used to automate infrastructure on AWS
+
+
+AWS CLI is a python utility
+
+
 Interview questions:
 https://github.com/iam-veeramalla/aws-devops-zero-to-hero/blob/main/day-8/Interview_q%26a
 https://youtu.be/qtkWHhikLh8?si=JVD6SCsgUgIY5WWc
-
-
-
-
-
 
 
 
