@@ -17,7 +17,7 @@ Terraform is used to automate the process of creating resources in AWS/Azure
 AWS CLI, AWS CFT, AWS API(Boto3),AWS CDK,Terraform are used to create EC2 instances in AWS using automation (good for loads of requests)
 By using AWS console also we can create EC2 instance in AWS manually.  (good for fewer requests)
 
-Keyvalue pair is used for autentcation, While creating EC2 instance in AWS,
+Keyvalue pair is used for authentcation, While creating EC2 instance in AWS,
 
 instance name: sk_instance
 keyvalue pair: test111
@@ -37,7 +37,7 @@ Containers use the resources from the base operating system that they are runnin
 A Container is package/bundle which is a combination of the application, application libraries/dependencies and System dependencies.
 
 To create container.
-Creare a Docker file and submit it to Docker engine using docker command.
+Create a Docker file and submit it to Docker engine using docker command.
 The docker engine converts the file to docker image/container image.
 Using docker command, convert the docker image to container. 
 Note: If docker engine is down then all the containers go down. This can be resolved can using 'Buildah'.
@@ -58,9 +58,9 @@ Lifecycle of docker:
 	1. Get a base image
 	2. Put the source code in the base image.
 	3. Run the specific command.
-2.Using docker cli, submit docker file to docker daemon using docker build commmand which generates docker image.
+2.Using docker cli, submit docker file to docker daemon using docker build command which generates docker image.
 3.Once the image is ready, use docker run command, it creates docker container.
-4.This container can be shared with pubilc docker registry. They can download the container and run the application.
+4.This container can be shared with public docker registry. They can download the container and run the application.
 
 
 Github vs DockerHub:
@@ -71,8 +71,8 @@ DockerHub is used to store the docker images.
 
 Difference between Entrypoint and CMD in docker file ?
 Both can be used to execute as start command. 
-Entry point value cant be changed. i.e it will have non oveeridable values.
-While CMD is configurable. (example: port value can be overriden)
+Entry point value cant be changed. i.e it will have non overidable values.
+While CMD is configurable. (example: port value can be overridden)
 
 
 Multi Stage builds:
@@ -96,16 +96,16 @@ Volumes have lifecycle.
 Docker Networking:
 =====================
 1.Bridge Networking:
-Networking allows containers to communicate with each other and the host system. Example: Front end container shuld talk to backend container.
-Also a scenario where we should restrict containers from communicating with each other. Example Login container need no talk to Payment container.
+Networking allows containers to communicate with each other and the host system. Example: Front end container should talk to backend container.
+Also a scenario where we should restrict containers from communicating with each other. Example Login container need not talk to Payment container.
 
 A bridge network is created by default whenever a container is created.
 A container can talk to a host using Bridge Networking. This bridge is a virtual ethernet.(VEth -> docker0)
 If there are 2 containers created on the host, then both containers will use same VEth to communicate to the host. So in this case we need custom Bridge Networking.
-Custom bridge networking will allow containers to have custom custom network(unique IPs) to communicate to the host. From this the different containers created inside the host are isolated.
+Custom bridge networking will allow containers to have custom network(unique IPs) to communicate to the host. From this the different containers created inside the host are isolated.
 
 2.Host Networking:
-	Whenever a container is created, docker will bind the container  to the Eth0 of the host.
+	Whenever a container is created, docker will bind the container to the Eth0 of the host.
 	i.e if we have access to host, then we can access container as well. This is not the secure approach.
 	
 3.Overlay networking:
@@ -116,7 +116,7 @@ Docker interview questions:
 =============================
 https://www.youtube.com/watch?v=I6ZBUEc4LrU
 1. What is docker ?
-		It is a open containerisation platform. It enable developers to package applications into bundles. Also to manage lifecycle of containers.
+		It is an open containerisation platform. It enable developers to package applications into bundles. Also to manage lifecycle of containers.
 2. How containers are different from Virtual machines?
 3. What is docker lifecycle ?
 		Docker file -> docker image -> docker container -> push to registry
@@ -134,11 +134,7 @@ https://www.youtube.com/watch?v=I6ZBUEc4LrU
 		Multi stage build allows to build docker container in multiple stages allowing to copy artifacts from one stage to another. Major advantage is to build light weight containers.
 10.What are distro less images in docker ?
 		VMs are exposed to vulnerabilities. Similarly, containers are also exposed to vulnerabilities as required and not required packages are also installed on containers. So to overcome this, the distro less images contain only application and its run time dependencies with a very minimum operating system libraries. They are very small and light weight images.
-11.What steps do you take to secure containers ?
-
-
-
-
+11.What steps do you take to secure containers? 
 
 
 
