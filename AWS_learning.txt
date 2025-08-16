@@ -162,6 +162,99 @@ AWS Cli, CloudFormation, Terraform, CDK etc are used to automate infrastructure 
 
 
 AWS CLI is a python utility
+AWS CLI is used for short and quick actions.
+Ex: simple scripts.
+
+Cloud Formation template (CFT):
+===========================
+CFT is built via Iac.
+Are used to create infrastructure on AWS and they implement the principles of Iac(Infrastructure as Code).
+AWS ClI doesn't implement Iac principles. Hence it is better to use CFT rather than AWS CLI.
+
+Iac - here we write code to create Infrastructure. But it has some principles.
+Any tool which is built via Iac should act as a middle man between user and one more multiple cloud providers.
+The templates can be of yaml, json and they should be declarative and versioned in nature.
+Declarative means - what you see is what you have.
+Ex of tools: Terraform, Cloud formation, Crossplane
+
+CFT supports yaml or json only.
+So basically CFT acts as a middle man which takes input from user either in yaml/json,reads the input and converts and it into AWS API calls.
+
+CFT supports Drift detection. It shows the changes/differences done previously.
+CFTs can be run through AWS UI (i.e via stack), Jenkins pipeline, gitlab pipeline.
+
+Basic components of CFT:
+Version
+Description
+Metadata
+Parameters - to add variables during runtime
+Rules - to validate parameters
+Mappings - assigning the parameters to variables
+Conditions
+Resources - this is the only mandatory field in template. All above are optional.
+
+
+Terraform is used in a multi-cloud environment.
+CloudFormation template is used only for one cloud.  If your org is not switching from AWS to any other cloud, then we can use CFT. However in near future if there is plan to change the cloud from AWS to Azure, then terraform is recommended.
+
+
+AWS Lambda:
+=============
+Compute and Server-less are the primary characteristics of Lambda.
+
+
+Cloud Front:
+=============
+It provides the solution for CDN.(Content Delivery Network)
+CDN will create local copies.
+It helps to cache the content in nearest edge locations
+CDN service for AWS in Cloud Front.
+
+ECR (Elastic Container Registry):
+==================================
+Container is package that has application code and software/dependencies required to run the application.
+ECR is a container registry similar to docker hub.
+This service is used to store and manage containers.  Basically used to store docker images.
+
+ECS (Elastic Container Service):
+==============================
+COE - Container Orchestration Environment
+ECS is independent f Kubernetes. Instead of pods, deployment etc , they have task, services, clusters etc 
+ECS restricted to AWWS a don't open source platform. 
+
+From Controller, you can bring the container up immediately whenever they go down.
+
+Different ways to create container orchestration services in AWS:
+1. Install EC2 and then install Kubernetes on top of that
+2. Use EKS
+3. Use ECS
+
+Note: Pod is the definition of container. I.e  it describes what resources, volumes, policies etc which are required for the container to run.
+It provides the environment for one or more containers to run.
+
+
+EKS (Elastic Kubernetes Service):
+================================
+Mater node(Control plane) - contains api, etc, scheduler, controller etc....this is user facing.
+Worker node (data plane) - where the app is actually deployed 
+
+EKS is a managed Control plane (Master nodes) by AWS, but it is not a managed Data plane.
+Managed Control plane means we need not worry about certificate expiry, Scheduler going down, etc getting crashed etc. All this will be taken care by EKS.
+The worker nodes(data plane) can be created by us using EC2 instances or y Fargate(serverless)
+
+In worker node , which is in private subnet, we have the following:
+A pod
+On top of pod ,we have service
+On top of service we have Ingress
+Then we have Ingress Controller  (which is supported by most of the Application Load Balancers (ALB) ). Ingress controller is called ALB controller . It will watch for the Ingress resource to be create and when ingress I created it then creates an ALB environment or the Application Load balancer.   Using the ALB the user from outside world can talk to ALB and from ALB the request goes to the application.
+
+
+
+
+
+Watch later: 
+Day 12 - Day15 - AWS CI/CD
+Day 16
 
 
 Interview questions:
